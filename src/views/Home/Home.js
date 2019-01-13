@@ -2,18 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+
 const Home = ({ categories }) => (
   <section>
-    <h1>The Trivia Quest</h1>
-    {categories.length > 0 && (
-      <section>
-        {categories.map(category => (
-          <Link to={`/categories/${category.id}`} key={category.id}>
-            {category.title}
-          </Link>
-        ))}
-      </section>
-    )}
+    <h1 className="homeTitle">
+      The Trivia Quest
+    </h1>
+    <i>
+      Choose your destiny, blyat.
+    </i>
+    <div className="row homeContainer">
+      {categories.length > 0 && (
+        <div>
+          {categories.map(category => (
+            < Link to = {
+              `/categories/${category.id}`
+            }
+            key = {
+              category.id
+            }
+            className = "button button-outline" >
+              {category.title}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
   </section>
 );
 

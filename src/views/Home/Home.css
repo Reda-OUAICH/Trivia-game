@@ -1,0 +1,14 @@
+a {
+  margin: 10px;
+}
+
+.homeContainer {
+  width: 60%;
+  height: auto;
+  margin: 50px auto;
+  flex-wrap: wrap;
+}
+
+.homeTitle {
+  margin-top: 50px;
+}

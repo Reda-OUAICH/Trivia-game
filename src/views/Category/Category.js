@@ -6,24 +6,23 @@ const Category = ({ category, currentQuestionIndex, handleSubmit, answerInput, e
   const currentQuestion = category.clues[currentQuestionIndex];
   return (
     <section className="category">
-    {endCategory ?
-      <Link to ='/'> Back to the category selection </Link>
-      :
-      <form onSubmit={handleSubmit}>
+      <Link to ='/'>
+        Back to the category selection
+      </Link>
+      <form className="categoryContainer" onSubmit={handleSubmit}>
         <h1>You choosed: {category.title}</h1>
         <div className="question">
           <h3 className="question__title">
             {currentQuestion.question}
           </h3>
-          <div className="question__answerInput">
+          <div className="categoryInput">
             <input ref={answerInput} />
-            <button className="question__submit" type="submit">
-              Next
-            </button>
           </div>
+          <button className="question__submit" type="submit">
+            Next
+          </button>
         </div>
       </form>
-    }
       <p>Your current score is : { result }</p>
     </section>
   );

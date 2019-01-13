@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from './Home';
 import api from '../../helpers/api';
+import HomeStyle from './Home.css';
 
 class HomeContainer extends Component {
   state = {

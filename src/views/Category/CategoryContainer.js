@@ -5,6 +5,7 @@ import React, {
 import {
   withRouter
 } from 'react-router-dom'
+import CategoryStyle from "./Category.css";
 import api from '../../helpers/api';
 import Category from './Category';
 
@@ -57,7 +58,7 @@ class CategoryContainer extends Component {
 
   render() {
     const { category, currentQuestion, result, endCategory } = this.state;
-    if (!category) return <div>is loading</div>
+    if (!category) return <div className="loader">IT'S LOADING, keep cool dude...</div>
 
     return (
       <Category
