@@ -1,4 +1,10 @@
-import React, { Component, createRef } from 'react';
+import React, { 
+  Component,
+  createRef 
+} from 'react';
+import {
+  withRouter
+} from 'react-router-dom'
 import api from '../../helpers/api';
 import Category from './Category';
 
@@ -6,49 +12,64 @@ class CategoryContainer extends Component {
   state = {
     category: null,
     currentQuestion: 0,
+    endCategory: false,
+    result: 0
   }
 
-  // createRef in order to bring back input value to its parent
   answerInput = createRef();
 
-  // async needed when using promise
   async componentDidMount() {
     const data = await api.getCategoryById(this.props.match.params.id);
-    // stored response in the state;
     this.setState({
       category: data,
+      score: localStorage.getItem('result')
     });
   }
 
   handleSubmit = (e) => {
-    // here I prevent the default bh of submitting form
     e.preventDefault();
-    // write logic to handle good/bad answer
-    // increment currentQuestion
-    // save in the storage the id of the question
-    // if no more question, remove category from categories playable
-    // increment score somewhere and redirect to /
-
+    const {currentQuestion, category, result} = this.state;
     const answer = this.answerInput.current.value;
-    // check if answer is equal to the requested answer from the current question
+    const goodAnswer = category.clues[currentQuestion].answer;
+    const nbQuestion = category.clues.length;
+    const idQuest = category.clues[currentQuestion].id;
+    
+    if (currentQuestion < (nbQuestion -1)) {
+      if (answer === goodAnswer) {
+        this.setState({ result: result -1 });
+        this.setState({currentQuestion : this.state.currentQuestion + 1 });
+        localStorage.setItem(currentQuestion, idQuest);
+      }
+      else {
+        this.setState({ currentQuestion:this.state.currentQuestion + 1 });
+      }
+    }
+    else {
+      const end = [];
+      const idCategory = category.id;
+      end.push(idCategory);
+      localStorage.setItem("categoryTab", end);
+      this.setState({
+        endCategory: true
+      })
+    }
   }
 
   render() {
-    const { category, currentQuestion } = this.state;
-    // at first render, category will be null so we need to wait
-    // before using data.
+    const { category, currentQuestion, result, endCategory } = this.state;
     if (!category) return <div>is loading</div>
 
     return (
       <Category
-        category={category}
-        currentQuestionIndex={currentQuestion}
+        category= {category}
+        currentQuestionIndex= {currentQuestion}
         handleSubmit={this.handleSubmit}
-        // plug createRef to chidlren
-        answerInput={this.answerInput}
+        result = {result}
+        answerInput= {this.answerInput}
+        endCategory = {endCategory}
       />
     );
   }
 }
 
-export default CategoryContainer;
+export default withRouter(CategoryContainer);

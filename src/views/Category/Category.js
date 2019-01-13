@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const Category = ({ category, currentQuestionIndex, handleSubmit, answerInput }) => {
+const Category = ({ category, currentQuestionIndex, handleSubmit, answerInput, endCategory, result }) => {
   const currentQuestion = category.clues[currentQuestionIndex];
   return (
-    <section>
+    <section className="category">
+    {endCategory ?
+      <Link to ='/'> Back to the category selection </Link>
+      :
       <form onSubmit={handleSubmit}>
         <h1>You choosed: {category.title}</h1>
         <div className="question">
@@ -12,14 +16,15 @@ const Category = ({ category, currentQuestionIndex, handleSubmit, answerInput })
             {currentQuestion.question}
           </h3>
           <div className="question__answerInput">
-            {/* We give the ref below in order check the value */}
             <input ref={answerInput} />
+            <button className="question__submit" type="submit">
+              Next
+            </button>
           </div>
-          <button className="question__submit" type="submit">
-            Next
-          </button>
         </div>
       </form>
+    }
+      <p>Your current score is : { result }</p>
     </section>
   );
 }

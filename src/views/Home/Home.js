@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Home = ({ categories }) => (
   <section>
-    <h1>Homepage</h1>
+    <h1>The Trivia Quest</h1>
     {categories.length > 0 && (
       <section>
         {categories.map(category => (
