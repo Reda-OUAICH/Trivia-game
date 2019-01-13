@@ -1,5 +1,5 @@
 .categoryContainer {
-  margin: 100px auto;
+  margin: 150px auto;
 }
 
 .categoryInput {
@@ -15,4 +15,8 @@
   position: absolute;
   top: 50%;
   width: 100%;
+}
+
+.badEndGame {
+  margin: 50px auto;
 }

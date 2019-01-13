@@ -21,7 +21,7 @@ const Home = ({ categories }) => (
             key = {
               category.id
             }
-            className = "button button-outline" >
+            className = "button button-outline">
               {category.title}
             </Link>
           ))}
