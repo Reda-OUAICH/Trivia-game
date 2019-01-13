@@ -24,7 +24,7 @@ Home.propTypes = {
       title: PropTypes.string,
       clues_count: PropTypes.number
     }),
-  ),
+  )
 }
 
 export default Home;
